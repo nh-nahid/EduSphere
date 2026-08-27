@@ -1,10 +1,3 @@
-/**
- * services/payment/SSLCommerzGateway.js
- *
- * Concrete SSLCommerz implementation of PaymentGateway.
- * All SSLCommerz-specific knowledge lives here so the rest of the app never
- * imports sslcommerz-lts directly.
- */
 const SSLCommerzPayment = require('sslcommerz-lts');
 const PaymentGateway = require('./PaymentGateway');
 
@@ -20,19 +13,6 @@ class SSLCommerzGateway extends PaymentGateway {
     return 'SSLCommerz';
   }
 
-  /**
-   * Build the SSLCommerz payment data object and call the init API.
-   *
-   * @param {{
-   *   amount:        number,
-   *   tranId:        string,
-   *   productName:   string,
-   *   customerName:  string,
-   *   customerEmail: string,
-   *   customerPhone: string,
-   * }} payload
-   * @returns {Promise<string>} GatewayPageURL
-   */
   async initiate(payload) {
     const sslcz = new SSLCommerzPayment(
       this._storeId,
@@ -74,16 +54,7 @@ class SSLCommerzGateway extends PaymentGateway {
     return url;
   }
 
-  /**
-   * Verify a success callback from SSLCommerz.
-   * A real production app should call sslcz.validate() here.
-   * For now we treat every success POST as valid (sandbox behaviour).
-   *
-   * @param {object} callbackData - req.body from the success POST
-   * @returns {Promise<boolean>}
-   */
   async verify(callbackData) {
-    // TODO: call sslcz.validate({ val_id: callbackData.val_id }) in production
     return !!(callbackData && callbackData.tran_id);
   }
 }
