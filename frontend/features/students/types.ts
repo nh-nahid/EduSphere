@@ -1,0 +1,3 @@
+export interface Student { _id: string; userId: { _id: string; name: string; email: string; avatar?: string; phone?: string }; schoolId: string; classId?: { _id: string; name: string; section: string }; roll: string; section: string; guardianName: string; guardianPhone: string; admissionDate: string; createdAt: string; }
+export interface CreateStudentPayload { name: string; email: string; password: string; phone?: string; roll: string; section: string; classId?: string; guardianName: string; guardianPhone: string; admissionDate: string; }
+export interface UpdateStudentPayload extends Partial<Omit<CreateStudentPayload, 'password'>> {}

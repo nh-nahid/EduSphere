@@ -1,0 +1,8 @@
+node_modules/
+.env
+public/avatars/*
+public/documents/*
+public/invoices/*
+!public/avatars/.gitkeep
+!public/documents/.gitkeep
+!public/invoices/.gitkeep

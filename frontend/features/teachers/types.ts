@@ -1,0 +1,2 @@
+export interface Teacher { _id: string; userId: { _id: string; name: string; email: string; avatar?: string; phone?: string }; schoolId: string; subjects: Array<{ _id: string; name: string }>; classIds: Array<{ _id: string; name: string; section: string }>; qualification: string; joiningDate: string; createdAt: string; }
+export interface CreateTeacherPayload { name: string; email: string; password: string; phone?: string; qualification: string; joiningDate: string; }

@@ -1,0 +1,3 @@
+export interface Assignment { _id: string; title: string; description: string; subjectId: { _id: string; name: string }; classId: { _id: string; name: string; section: string }; teacherId: { _id: string; userId: { name: string } }; dueDate: string; fileUrl?: string; schoolId: string; createdAt: string; }
+export interface Submission { _id: string; assignmentId: string; studentId: { _id: string; userId: { name: string }; roll: string }; fileUrl: string; submittedAt: string; marks?: number; feedback?: string; }
+export interface CreateAssignmentPayload { title: string; description: string; subjectId: string; classId: string; dueDate: string; }
