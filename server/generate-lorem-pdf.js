@@ -14,7 +14,7 @@ function generateLoremAssignment() {
 
   doc.pipe(writeStream);
 
-  // ── Header Block ──
+  
   doc.fontSize(22).font('Helvetica-Bold').fillColor('#0d9488').text('ACADEMIC ASSIGNMENT SHEET', { align: 'center' });
   doc.fontSize(10).font('Helvetica').fillColor('#64748b').text('Subject Course: General Sciences & Calculus', { align: 'center' });
   doc.text('Academic Term: Autumn 2026-2027', { align: 'center' });
@@ -23,12 +23,12 @@ function generateLoremAssignment() {
   doc.moveTo(50, doc.y).lineTo(545, doc.y).strokeColor('#cbd5e1').stroke();
   doc.moveDown();
 
-  // ── Title ──
+  
   doc.fontSize(15).font('Helvetica-Bold').fillColor('#0f172a').text('Coursework Unit 3: Linear Systems & Heat Equations');
   doc.fontSize(10).font('Helvetica-Oblique').fillColor('#64748b').text('Due Date: Friday, September 15, 2026');
   doc.moveDown();
 
-  // ── General Guidelines ──
+  
   doc.fontSize(12).font('Helvetica-Bold').fillColor('#0f172a').text('General Submission Guidelines:');
   doc.fontSize(10).font('Helvetica').fillColor('#334155').text(
     '1. All answers must be shown with complete step-by-step calculus workings.\n' +
@@ -37,7 +37,7 @@ function generateLoremAssignment() {
   );
   doc.moveDown();
 
-  // ── Questions Section ──
+  
   doc.fontSize(12).font('Helvetica-Bold').fillColor('#0f172a').text('Coursework Tasks (Lorem Ipsum):');
   doc.moveDown(0.5);
 
@@ -65,7 +65,7 @@ function generateLoremAssignment() {
   );
   doc.moveDown(2);
 
-  // ── Footer ──
+  
   doc.moveTo(50, doc.y).lineTo(545, doc.y).strokeColor('#e2e8f0').stroke();
   doc.moveDown(0.5);
   doc.fontSize(9).font('Helvetica').fillColor('#94a3b8').text(

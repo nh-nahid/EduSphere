@@ -10,9 +10,9 @@ const ROLE_ROUTES: Record<string, string[]> = {
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  // Allow public routes
+  
   if (PUBLIC_ROUTES.some(r => pathname.startsWith(r))) return NextResponse.next()
-  // Redirect root to dashboard
+  
   if (pathname === '/') return NextResponse.redirect(new URL('/dashboard', request.url))
   return NextResponse.next()
 }

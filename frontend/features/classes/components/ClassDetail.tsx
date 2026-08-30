@@ -58,7 +58,7 @@ export const ClassDetail = ({ id }: ClassDetailProps) => {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      {/* Overview Card */}
+      {}
       <Card className="border-teal-100 bg-white shadow-sm overflow-hidden rounded-2xl">
         <CardHeader className="brand-banner text-white p-6">
           <div className="flex justify-between items-center">
@@ -102,9 +102,9 @@ export const ClassDetail = ({ id }: ClassDetailProps) => {
         </CardContent>
       </Card>
 
-      {/* Grid containing Subjects and Enrolled Students list */}
+      {}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Left Side: Subjects List */}
+        {}
         <div className="md:col-span-1 space-y-4">
           <div className="flex items-center gap-2 px-1">
             <BookOpen size={16} className="text-teal-600" />
@@ -117,7 +117,7 @@ export const ClassDetail = ({ id }: ClassDetailProps) => {
           />
         </div>
 
-        {/* Right Side: Enrolled Students */}
+        {}
         <div className="md:col-span-2 space-y-4">
           <div className="flex items-center gap-2 px-1">
             <GraduationCap size={18} className="text-teal-600" />

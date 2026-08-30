@@ -16,45 +16,45 @@ export default function DashboardPage() {
   const isTeacher = user?.role === 'teacher'
   const isStudent = user?.role === 'student'
 
-  // ── Teacher Profile Query ──
+  
   const { data: teacherProfile, isLoading: isLoadingTeacher } = useQuery({
     queryKey: ['teacher-my-profile'],
     queryFn: () => api.get('/teachers/me/profile').then(r => r.data.data),
     enabled: isTeacher
   })
 
-  // ── Student Profile Query ──
+  
   const { data: studentProfile, isLoading: isLoadingStudent } = useQuery({
     queryKey: ['student-my-profile'],
     queryFn: () => api.get('/students/my').then(r => r.data.data),
     enabled: isStudent
   })
 
-  // ── Student Attendance Query ──
+  
   const { data: studentAttendance } = useQuery({
     queryKey: ['student-my-attendance'],
     queryFn: () => api.get('/attendance/my').then(r => r.data.data),
     enabled: isStudent
   })
 
-  // ── Student Fees Query ──
+  
   const { data: studentFees } = useQuery({
     queryKey: ['student-my-fees'],
     queryFn: () => api.get('/fees/student').then(r => r.data.data),
     enabled: isStudent
   })
 
-  // ── Student Attendance Stats ──
+  
   const totalDays = studentAttendance?.length || 0
   const presentDays = studentAttendance?.filter((r: any) => r.status === 'present').length || 0
   const attendanceRate = totalDays ? (presentDays / totalDays) * 100 : 0
 
-  // ── Student Fee Stats ──
+  
   const pendingFeesCount = studentFees?.filter((f: any) => f.paymentStatus !== 'paid').length || 0
 
   return (
     <div className="space-y-6">
-      {/* ── Page Header ── */}
+      {}
       <div className="px-1">
         <h2 className="text-2xl font-bold text-teal-955 font-sans tracking-tight">
           Welcome back, {user?.name || 'User'}!
@@ -65,7 +65,7 @@ export default function DashboardPage() {
       </div>
 
       {isAdmin && (
-        // ── Admin Dashboard (All database stats) ──
+        
         <div className="space-y-6">
           <DashboardStats />
           
@@ -86,13 +86,13 @@ export default function DashboardPage() {
       )}
 
       {isTeacher && (
-        // ── Teacher Dashboard ──
+        
         <div className="space-y-6">
           {isLoadingTeacher ? (
             <div className="text-teal-600 font-medium py-6">Loading teacher stats...</div>
           ) : (
             <>
-              {/* Stats Block */}
+              {}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <StatBox
                   title="My Assigned Classes"
@@ -111,9 +111,9 @@ export default function DashboardPage() {
                 />
               </div>
 
-              {/* Detail Sections */}
+              {}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Classes Managed List */}
+                {}
                 <CardLayout title="My Assigned Classes" icon={School}>
                   <div className="space-y-2">
                     {teacherProfile?.classIds && teacherProfile.classIds.length > 0 ? (
@@ -135,7 +135,7 @@ export default function DashboardPage() {
                   </div>
                 </CardLayout>
 
-                {/* Subjects List */}
+                {}
                 <CardLayout title="My Subjects" icon={BookOpen}>
                   <div className="flex flex-wrap gap-2">
                     {teacherProfile?.subjects && teacherProfile.subjects.length > 0 ? (
@@ -159,13 +159,13 @@ export default function DashboardPage() {
       )}
 
       {isStudent && (
-        // ── Student Dashboard ──
+        
         <div className="space-y-6">
           {isLoadingStudent ? (
             <div className="text-teal-600 font-medium py-6">Loading portal stats...</div>
           ) : (
             <>
-              {/* Stats Block */}
+              {}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <StatBox
                   title="My Attendance Rate"
@@ -185,9 +185,9 @@ export default function DashboardPage() {
                 />
               </div>
 
-              {/* Detail Sections */}
+              {}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Class Enrollment Details */}
+                {}
                 <CardLayout title="Enrollment Details" icon={School}>
                   <div className="grid grid-cols-2 gap-4 text-sm font-sans">
                     <div>
@@ -217,7 +217,7 @@ export default function DashboardPage() {
                   </div>
                 </CardLayout>
 
-                {/* Quick actions for student */}
+                {}
                 <CardLayout title="Quick Links" icon={BookOpen}>
                   <div className="grid grid-cols-2 gap-3">
                     <Link
@@ -245,7 +245,7 @@ export default function DashboardPage() {
   )
 }
 
-// ── Shared Dashboard Layout Elements ──────────────────────────────────────────
+
 
 interface CardLayoutProps {
   title: string

@@ -1,6 +1,6 @@
 const User = require('../models/User');
 
-// GET /users/profile
+
 exports.getProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).select('-password -refreshToken -resetPasswordToken -resetPasswordExpire');
@@ -8,7 +8,7 @@ exports.getProfile = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
-// PUT /users/profile
+
 exports.updateProfile = async (req, res, next) => {
   try {
     const { name, phone } = req.body;
@@ -20,7 +20,7 @@ exports.updateProfile = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
-// PUT /users/change-password
+
 exports.changePassword = async (req, res, next) => {
   try {
     const { currentPassword, newPassword } = req.body;

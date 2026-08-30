@@ -67,13 +67,13 @@ export const SmsLogTable = () => {
   const [message, setMessage] = useState('')
   const [showSendForm, setShowSendForm] = useState(false)
 
-  // Fetch SMS Logs Query
+  
   const { data: logs, isLoading } = useQuery({
     queryKey: ['sms-logs'],
     queryFn: () => api.get('/sms/logs').then(r => r.data.data)
   })
 
-  // Send Manual SMS Mutation
+  
   const { mutate: sendSms, isPending: isSending } = useMutation({
     mutationFn: (payload: { phone: string; message: string }) => api.post('/sms/send', payload),
     onSuccess: (res) => {
@@ -166,7 +166,7 @@ export const SmsLogTable = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      {/* Page Header slot */}
+      {}
       <div className="flex justify-between items-center px-1">
         <h2 className="text-xl font-bold text-teal-955 font-sans tracking-tight flex items-center gap-2">
           <MessageSquare size={20} className="text-teal-600" />
@@ -181,7 +181,7 @@ export const SmsLogTable = () => {
         </Button>
       </div>
 
-      {/* Manual SMS Dispatch Form */}
+      {}
       {showSendForm && (
         <Card className="border-teal-100 bg-white rounded-2xl shadow-sm max-w-md">
           <CardHeader className="brand-banner text-white p-5 rounded-t-2xl">
@@ -253,7 +253,7 @@ export const SmsLogTable = () => {
         </Card>
       )}
 
-      {/* SMS Logs Roster */}
+      {}
       {!showSendForm && (
         <DataTable
           data={logs || []}

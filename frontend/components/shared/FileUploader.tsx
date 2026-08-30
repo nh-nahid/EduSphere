@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 interface FileUploaderProps {
   onFileSelect: (file: File | null) => void;
   accept?: string;
-  maxSize?: number; // in MB
+  maxSize?: number; 
 }
 
 export function FileUploader({ onFileSelect, accept, maxSize = 5 }: FileUploaderProps) {

@@ -12,11 +12,11 @@ export const FeeTable = () => {
   const { user } = useAuth()
   const isAdmin = user?.role === 'admin' || user?.role === 'super_admin'
 
-  // Admin sees all fee schedules, student sees mapped fee status
+  
   const { data: adminFees, isLoading: isLoadingAdmin } = useFees()
   const { mutate: initiatePayment, isPending: isPaying } = useInitiatePayment()
 
-  // Student specific query to fetch payments mapped to fees
+  
   const { data: studentFees, isLoading: isLoadingStudent } = useQuery({
     queryKey: ['student-fees'],
     queryFn: () => api.get('/fees/student').then(r => r.data.data),
@@ -95,7 +95,7 @@ export const FeeTable = () => {
     )
   }
 
-  // Student View
+  
   if (isLoadingStudent) {
     return <div className="text-center py-10 text-teal-600 font-medium">Loading your fees...</div>
   }

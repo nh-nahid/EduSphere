@@ -20,7 +20,7 @@ export const GradeForm = () => {
 
   const queryClient = useQueryClient()
 
-  // ── Teacher/Admin Form States ──
+  
   const [selectedClassId, setSelectedClassId] = useState('')
   const [selectedSubjectId, setSelectedSubjectId] = useState('')
   const [selectedStudentId, setSelectedStudentId] = useState('')
@@ -29,10 +29,10 @@ export const GradeForm = () => {
   const [totalMarks, setTotalMarks] = useState('100')
   const [remarks, setRemarks] = useState('')
 
-  // Fetch classes for drop-down
+  
   const { data: classes } = useClasses()
 
-  // Dynamic subjects query based on selected class
+  
   const { data: subjects } = useQuery({
     queryKey: ['subjects-class', selectedClassId],
     queryFn: async () => {
@@ -45,7 +45,7 @@ export const GradeForm = () => {
     enabled: !!selectedClassId
   })
 
-  // Dynamic students query based on selected class
+  
   const { data: students } = useQuery({
     queryKey: ['students-class-grades', selectedClassId],
     queryFn: async () => {
@@ -55,7 +55,7 @@ export const GradeForm = () => {
     enabled: !!selectedClassId
   })
 
-  // ── Student Mode Queries ──
+  
   const { data: myProfile } = useQuery({
     queryKey: ['student-profile-grades'],
     queryFn: () => api.get('/students/my').then(r => r.data.data),
@@ -68,7 +68,7 @@ export const GradeForm = () => {
     enabled: !!myProfile?._id
   })
 
-  // Record Grade Mutation
+  
   const { mutate: submitGrade, isPending: isSaving } = useMutation({
     mutationFn: (payload: any) => gradesApi.record(payload),
     onSuccess: () => {
@@ -97,7 +97,7 @@ export const GradeForm = () => {
     })
   }
 
-  // ── Student View ──
+  
   if (isStudent) {
     if (isLoadingStudentGrades) {
       return <div className="text-teal-600 font-medium py-10 text-center">Loading grades card...</div>
@@ -150,7 +150,7 @@ export const GradeForm = () => {
     )
   }
 
-  // ── Teacher/Admin View ──
+  
   return (
     <div className="space-y-6 max-w-xl">
       <Card className="border-teal-100 bg-white rounded-2xl shadow-sm">
@@ -159,7 +159,7 @@ export const GradeForm = () => {
         </CardHeader>
         <CardContent className="p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Class Selection */}
+            {}
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-teal-900 uppercase tracking-wider block">Class Room</label>
               <select
@@ -183,7 +183,7 @@ export const GradeForm = () => {
 
             {selectedClassId && (
               <>
-                {/* Subject Selection */}
+                {}
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-teal-900 uppercase tracking-wider block">Subject Course</label>
                   <select
@@ -201,7 +201,7 @@ export const GradeForm = () => {
                   </select>
                 </div>
 
-                {/* Student Selection */}
+                {}
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-teal-900 uppercase tracking-wider block">Enrolled Student</label>
                   <select
@@ -219,7 +219,7 @@ export const GradeForm = () => {
                   </select>
                 </div>
 
-                {/* Exam Session Selection */}
+                {}
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-teal-900 uppercase tracking-wider block">Exam Category</label>
                   <select
@@ -235,7 +235,7 @@ export const GradeForm = () => {
                   </select>
                 </div>
 
-                {/* Marks input */}
+                {}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-teal-900 uppercase tracking-wider block">Score Obtained</label>
@@ -265,7 +265,7 @@ export const GradeForm = () => {
                   </div>
                 </div>
 
-                {/* Remarks field */}
+                {}
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-teal-900 uppercase tracking-wider block">Instructor Remarks</label>
                   <textarea

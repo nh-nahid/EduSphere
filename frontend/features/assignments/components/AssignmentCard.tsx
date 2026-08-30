@@ -19,21 +19,21 @@ export const AssignmentCard = () => {
 
   const queryClient = useQueryClient()
 
-  // ── Teacher/Admin States ──
+  
   const [selectedClassId, setSelectedClassId] = useState('')
   const [showCreateForm, setShowCreateForm] = useState(false)
 
-  // Form Fields
+  
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [selectedSubjectId, setSelectedSubjectId] = useState('')
   const [dueDate, setDueDate] = useState('')
   const [fileUrl, setFileUrl] = useState('')
 
-  // Fetch classes for drop-down
+  
   const { data: classes } = useClasses()
 
-  // Fetch subjects for select
+  
   const { data: subjects } = useQuery({
     queryKey: ['subjects-assignments', selectedClassId],
     queryFn: async () => {
@@ -46,7 +46,7 @@ export const AssignmentCard = () => {
     enabled: !!selectedClassId
   })
 
-  // ── Student Profile Query ──
+  
   const { data: studentProfile } = useQuery({
     queryKey: ['student-profile-assignments'],
     queryFn: () => api.get('/students/my').then(r => r.data.data),
@@ -55,14 +55,14 @@ export const AssignmentCard = () => {
 
   const targetClassId = isStudent ? studentProfile?.classId?._id : selectedClassId
 
-  // Fetch Assignments Query
+  
   const { data: assignments, isLoading } = useQuery({
     queryKey: ['assignments-list', targetClassId],
     queryFn: () => assignmentsApi.getAll({ classId: targetClassId }),
     enabled: !!targetClassId
   })
 
-  // Create Assignment Mutation
+  
   const { mutate: createAssignment, isPending: isCreating } = useMutation({
     mutationFn: (payload: any) => assignmentsApi.create(payload),
     onSuccess: () => {
@@ -151,7 +151,7 @@ export const AssignmentCard = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      {/* Top filter controls */}
+      {}
       {!isStudent && (
         <div className="flex justify-between items-center bg-white p-4 border border-teal-100/50 rounded-2xl">
           <div className="flex items-center gap-3">
@@ -185,7 +185,7 @@ export const AssignmentCard = () => {
         </div>
       )}
 
-      {/* Homework publishing form */}
+      {}
       {showCreateForm && selectedClassId && (
         <Card className="border-teal-100 bg-white rounded-2xl shadow-sm max-w-xl">
           <CardHeader className="brand-banner text-white p-5 rounded-t-2xl">
@@ -272,7 +272,7 @@ export const AssignmentCard = () => {
         </Card>
       )}
 
-      {/* Main Homework List display */}
+      {}
       {!showCreateForm && (
         <div className="space-y-4">
           <h2 className="text-xl font-bold text-teal-955 font-sans">

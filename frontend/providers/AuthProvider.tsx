@@ -34,12 +34,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = async () => {
     try {
-      // Best-effort: tell the server to clear the refresh token.
-      // If the network is down or the server is unreachable we still
-      // clear local state so the user isn't stuck on the dashboard.
+      
+      
+      
       await api.post('/auth/logout')
     } catch {
-      // Intentionally swallowed — local logout always proceeds.
+      
     } finally {
       setUser(null)
       window.location.href = '/login'

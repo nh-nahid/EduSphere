@@ -12,7 +12,7 @@ exports.generateFeeInvoice = async ({ payment, student, fee, school, studentName
 
       doc.pipe(writeStream);
 
-      // ── Header ──────────────────────────────────────────────
+      
       doc.fontSize(22).font('Helvetica-Bold').text(school.name || 'School Name', { align: 'center' });
       doc.fontSize(10).font('Helvetica').text(school.address || '', { align: 'center' });
       doc.fontSize(10).text(school.email || '', { align: 'center' });
@@ -25,7 +25,7 @@ exports.generateFeeInvoice = async ({ payment, student, fee, school, studentName
       doc.moveTo(50, doc.y).lineTo(545, doc.y).stroke();
       doc.moveDown();
 
-      // ── Receipt Info ─────────────────────────────────────────
+      
       const col1 = 50, col2 = 300;
       const rowH = 20;
       let y = doc.y;
@@ -44,7 +44,7 @@ exports.generateFeeInvoice = async ({ payment, student, fee, school, studentName
       doc.moveTo(50, y).lineTo(545, y).stroke();
       y += 10;
 
-      // ── Fee Details ──────────────────────────────────────────
+      
       doc.fontSize(12).font('Helvetica-Bold').text('Fee Details', col1, y);
       y += rowH;
       doc.fontSize(11).font('Helvetica-Bold').text('Description:', col1, y).font('Helvetica').text(`${fee.title} (${fee.type})`, col2, y);
@@ -59,11 +59,11 @@ exports.generateFeeInvoice = async ({ payment, student, fee, school, studentName
       doc.moveTo(50, y).lineTo(545, y).stroke();
       y += 10;
 
-      // ── Amount ───────────────────────────────────────────────
+      
       doc.fontSize(14).font('Helvetica-Bold').text('Amount Paid:', col1, y).text(`৳ ${payment.amount.toFixed(2)}`, col2, y);
       y += 30;
 
-      // ── Footer ───────────────────────────────────────────────
+      
       doc.moveTo(50, y).lineTo(545, y).stroke();
       y += 15;
       doc.fontSize(10).font('Helvetica').fillColor('gray')

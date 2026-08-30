@@ -10,14 +10,14 @@ import { Building2, Plus, Calendar, RefreshCw } from 'lucide-react'
 export const SchoolTable = () => {
   const [showAddForm, setShowAddForm] = useState(false)
   
-  // Form Fields
+  
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
   const [plan, setPlan] = useState('basic')
 
-  // Queries & Mutations
+  
   const { data: schools, isLoading } = useSchools()
   const { mutate: createSchool, isPending: isCreating } = useCreateSchool()
   const { mutate: toggleSchool, isPending: isToggling } = useToggleSchoolStatus()
@@ -133,7 +133,7 @@ export const SchoolTable = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      {/* Network Header */}
+      {}
       <div className="flex justify-between items-center px-1">
         <div className="space-y-1">
           <h2 className="text-xl font-bold text-teal-955 font-sans tracking-tight flex items-center gap-2">
@@ -153,7 +153,7 @@ export const SchoolTable = () => {
         </Button>
       </div>
 
-      {/* Add School Form */}
+      {}
       {showAddForm && (
         <Card className="border-teal-100 bg-white rounded-2xl shadow-sm max-w-xl">
           <CardHeader className="brand-banner text-white p-5 rounded-t-2xl">
@@ -235,7 +235,7 @@ export const SchoolTable = () => {
         </Card>
       )}
 
-      {/* Schools list */}
+      {}
       {!showAddForm && (
         <DataTable
           data={schools || []}

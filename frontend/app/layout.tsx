@@ -5,7 +5,7 @@ import QueryProvider from '@/providers/QueryProvider'
 import { AuthProvider } from '@/providers/AuthProvider'
 import { Toaster } from 'sonner'
 
-// Inter — the gold-standard sans-serif for dashboards
+
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',

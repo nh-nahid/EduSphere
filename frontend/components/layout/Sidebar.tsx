@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useAuth } from '@/providers/AuthProvider'
 
-// ── Nav ───────────────────────────────────────────────────────────────────────
+
 const BASE_GROUPS = [
   {
     label: 'Overview',
@@ -46,7 +46,7 @@ const ROLE_PILL: Record<string, string> = {
   student:     'bg-amber-100  text-amber-700',
 }
 
-// ── Component ─────────────────────────────────────────────────────────────────
+
 export default function Sidebar() {
   const pathname = usePathname()
   const { user, logout } = useAuth()
@@ -78,12 +78,12 @@ export default function Sidebar() {
         borderRight: '1.5px solid var(--sidebar-border-color)',
       }}
     >
-      {/* ── Logo ─────────────────────────────────────────────────────────── */}
+      {}
       <div
         className="px-5 py-[18px] flex items-center gap-3"
         style={{ borderBottom: '1.5px solid var(--sidebar-border-color)' }}
       >
-        {/* eBooi-style icon mark — open book inside a rounded square */}
+        {}
         <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 brand-banner">
           <School size={15} className="text-white" strokeWidth={2.2} />
         </div>
@@ -103,7 +103,7 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* ── Nav ──────────────────────────────────────────────────────────── */}
+      {}
       <nav className="flex-1 overflow-y-auto px-3 py-5 space-y-6">
         {groups.map(group => (
           <div key={group.label}>
@@ -148,7 +148,7 @@ export default function Sidebar() {
                       }
                     }}
                   >
-                    {/* Active pill indicator (eBooi-style left accent) */}
+                    {}
                     {active && (
                       <span
                         className="absolute left-0 inset-y-[6px] w-[3px] rounded-r-full"
@@ -156,7 +156,7 @@ export default function Sidebar() {
                       />
                     )}
 
-                    {/* Icon in a tinted box when active */}
+                    {}
                     <span
                       className="w-6 h-6 flex items-center justify-center rounded-lg shrink-0 transition-colors"
                       style={
@@ -177,17 +177,17 @@ export default function Sidebar() {
         ))}
       </nav>
 
-      {/* ── Footer ───────────────────────────────────────────────────────── */}
+      {}
       <div
         className="px-4 py-4 space-y-3"
         style={{ borderTop: '1.5px solid var(--sidebar-border-color)' }}
       >
-        {/* User card — eBooi-style rounded info strip */}
+        {}
         <Link
           href="/profile"
           className="flex items-center gap-3 px-2 py-2 rounded-xl group transition-colors hover:bg-teal-50"
         >
-          {/* Avatar */}
+          {}
           <div
             className="w-8 h-8 rounded-full flex items-center justify-center text-[13px] font-bold uppercase shrink-0 text-white"
             style={{ background: 'linear-gradient(135deg, #14b8a6, #0d9488)' }}
@@ -210,7 +210,7 @@ export default function Sidebar() {
           </div>
         </Link>
 
-        {/* Sign out */}
+        {}
         <button
           onClick={logout}
           className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] text-rose-500 hover:bg-rose-50 hover:text-rose-600 transition-all duration-150"

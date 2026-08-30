@@ -5,7 +5,7 @@ const api = axios.create({
   withCredentials: true,
 })
 
-// Response interceptor: on 401 try refresh, then retry once
+
 api.interceptors.response.use(
   (res) => res,
   async (error) => {

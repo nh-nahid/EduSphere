@@ -10,13 +10,13 @@ import { Users, Shield, RefreshCw } from 'lucide-react'
 export default function AdminUsersPage() {
   const queryClient = useQueryClient()
 
-  // Fetch all users in school
+  
   const { data: users, isLoading } = useQuery({
     queryKey: ['admin-users-list'],
     queryFn: () => api.get('/admin/users').then(r => r.data.data)
   })
 
-  // Toggle user active status mutation
+  
   const { mutate: toggleStatus, isPending: isToggling } = useMutation({
     mutationFn: (userId: string) => api.patch(`/admin/users/${userId}/toggle`),
     onSuccess: () => {
@@ -66,7 +66,7 @@ export default function AdminUsersPage() {
     {
       header: 'Access Status',
       cell: (user: any) => {
-        const isActive = user.isActive !== false // Default to true if undefined
+        const isActive = user.isActive !== false 
         return (
           <span className={`px-2 py-0.5 text-xs font-semibold rounded-full border ${isActive ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-rose-50 text-rose-700 border-rose-100'}`}>
             {isActive ? 'Active' : 'Blocked'}
@@ -98,7 +98,7 @@ export default function AdminUsersPage() {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      {/* Page Header */}
+      {}
       <div className="px-1">
         <h2 className="text-xl font-bold text-teal-955 font-sans tracking-tight flex items-center gap-2">
           <Shield size={20} className="text-teal-600" />
@@ -109,7 +109,7 @@ export default function AdminUsersPage() {
         </p>
       </div>
 
-      {/* User Table */}
+      {}
       <DataTable
         data={users || []}
         columns={columns}

@@ -87,9 +87,9 @@ export const TeacherCard = ({ id, teacher: initialTeacher }: TeacherCardProps) =
           ))}
         </div>
 
-        {/* Subjects & Classes */}
+        {}
         <div className="border-t border-teal-50 pt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {/* Subjects */}
+          {}
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-teal-950 uppercase tracking-wider flex items-center gap-1.5">
               <BookOpen size={14} className="text-teal-600" /> Subjects Taught
@@ -107,7 +107,7 @@ export const TeacherCard = ({ id, teacher: initialTeacher }: TeacherCardProps) =
             </div>
           </div>
 
-          {/* Classes Managed */}
+          {}
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-teal-950 uppercase tracking-wider flex items-center gap-1.5">
               <GraduationCap size={14} className="text-teal-600" /> Managed Classes

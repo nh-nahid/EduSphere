@@ -19,15 +19,15 @@ export const AttendanceSheet = () => {
 
   const queryClient = useQueryClient()
 
-  // ── Teacher/Admin States ──
+  
   const [selectedClassId, setSelectedClassId] = useState('')
   const [date, setDate] = useState(new Date().toISOString().split('T')[0])
   const [attendanceRecords, setAttendanceRecords] = useState<Record<string, 'present' | 'absent' | 'late'>>({})
 
-  // Fetch classes for drop-down
+  
   const { data: classes } = useClasses()
 
-  // Fetch students for class
+  
   const { data: students, isLoading: isLoadingStudents } = useQuery({
     queryKey: ['students-class', selectedClassId],
     queryFn: () => apiGetStudentsByClass(selectedClassId),
@@ -43,14 +43,14 @@ export const AttendanceSheet = () => {
     return body.data || []
   }
 
-  // ── Student Attendance Query ──
+  
   const { data: studentAttendance, isLoading: isLoadingStudent } = useQuery({
     queryKey: ['my-attendance'],
     queryFn: () => attendanceApi.getMy(),
     enabled: isStudent
   })
 
-  // Mark Attendance Mutation
+  
   const { mutate: submitAttendance, isPending: isSaving } = useMutation({
     mutationFn: (payload: any) => attendanceApi.mark(payload),
     onSuccess: () => {
@@ -87,7 +87,7 @@ export const AttendanceSheet = () => {
     })
   }
 
-  // ── Student View ──
+  
   if (isStudent) {
     if (isLoadingStudent) {
       return <div className="text-teal-600 font-medium py-10 text-center">Loading attendance history...</div>
@@ -124,7 +124,7 @@ export const AttendanceSheet = () => {
     )
   }
 
-  // ── Teacher/Admin View ──
+  
   return (
     <div className="space-y-6 max-w-4xl">
       <Card className="border-teal-100 bg-white rounded-2xl shadow-sm">
@@ -134,7 +134,7 @@ export const AttendanceSheet = () => {
         <CardContent className="p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Class Selector */}
+              {}
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-teal-900 uppercase tracking-wider block">Target Class</label>
                 <select
@@ -152,7 +152,7 @@ export const AttendanceSheet = () => {
                 </select>
               </div>
 
-              {/* Date picker */}
+              {}
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-teal-900 uppercase tracking-wider block">Attendance Date</label>
                 <input

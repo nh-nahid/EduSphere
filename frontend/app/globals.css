@@ -4,15 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   SchoolMS Design System
-   Inspired by eBooi's visual language:
-     • Teal / cyan as the primary brand colour
-     • Warm off-white backgrounds — never pure grey
-     • Rounded, airy cards with hairline borders
-     • Generous whitespace and clean sans-serif typography
-     • Subtle dot / grid decorative accents
-   ───────────────────────────────────────────────────────────────────────── */
+
 
 @theme inline {
   --color-background:            var(--background);
@@ -55,77 +47,75 @@
   --radius-2xl: calc(var(--radius) * 2);
 }
 
-/* ── Light theme tokens ──────────────────────────────────────────────────── */
+
 :root {
-  /* Teal brand palette (eBooi-inspired) */
+  
   --brand-50:  #f0fdfa;
   --brand-100: #ccfbf1;
   --brand-200: #99f6e4;
   --brand-300: #5eead4;
   --brand-400: #2dd4bf;
-  --brand-500: #14b8a6;   /* primary  */
-  --brand-600: #0d9488;   /* darker   */
-  --brand-700: #0f766e;   /* darkest  */
+  --brand-500: #14b8a6;   
+  --brand-600: #0d9488;   
+  --brand-700: #0f766e;   
 
-  /* Page & surface */
-  --background:          #f8fffe;   /* warm teal-tinted off-white */
-  --foreground:          #134e4a;   /* teal-950 — deep readable green-teal */
+  
+  --background:          #f8fffe;   
+  --foreground:          #134e4a;   
 
-  /* Cards — pure white with hairline teal border */
+  
   --card:                #ffffff;
   --card-foreground:     #134e4a;
 
-  /* Popover */
+  
   --popover:             #ffffff;
   --popover-foreground:  #134e4a;
 
-  /* Primary — teal-500 */
+  
   --primary:             #14b8a6;
   --primary-foreground:  #ffffff;
 
-  /* Secondary */
+  
   --secondary:           #f0fdfa;
   --secondary-foreground:#0f766e;
 
-  /* Muted */
+  
   --muted:               #f0fdf9;
   --muted-foreground:    #6b9e9a;
 
-  /* Accent — soft teal wash */
+  
   --accent:              #ccfbf1;
   --accent-foreground:   #0f766e;
 
-  /* Destructive */
+  
   --destructive:         #f43f5e;
 
-  /* Borders — teal-tinted hairlines */
+  
   --border:              #d1faf4;
   --input:               #e6fdf9;
   --ring:                #5eead4;
 
-  /* Rounded corners — generous like eBooi cards */
+  
   --radius: 0.625rem;
 
-  /* Charts — teal palette with complementary accents */
-  --chart-1: #14b8a6;   /* teal      */
-  --chart-2: #06b6d4;   /* cyan      */
-  --chart-3: #3b82f6;   /* blue      */
-  --chart-4: #f59e0b;   /* amber     */
-  --chart-5: #f43f5e;   /* rose      */
+  
+  --chart-1: #14b8a6;   
+  --chart-2: #06b6d4;   
+  --chart-3: #3b82f6;   
+  --chart-4: #f59e0b;   
+  --chart-5: #f43f5e;   
 
-  /* ── Sidebar tokens ─────────────────────────────────────────────────────
-     White sidebar, teal accent — mirrors eBooi's clean white nav bar
-  ─────────────────────────────────────────────────────────────────────── */
+  
   --sidebar-bg:            #ffffff;
-  --sidebar-border-color:  #d1faf4;           /* teal-tinted hairline  */
-  --sidebar-label:         #99c5c2;           /* muted teal for labels */
-  --sidebar-text:          #4d7c78;           /* teal-700 readable     */
-  --sidebar-text-hover:    #0d9488;           /* teal-600 on hover     */
-  --sidebar-active-bg:     #f0fdfa;           /* teal-50               */
-  --sidebar-active-text:   #0f766e;           /* teal-700              */
-  --sidebar-active-dot:    #14b8a6;           /* teal-500              */
+  --sidebar-border-color:  #d1faf4;           
+  --sidebar-label:         #99c5c2;           
+  --sidebar-text:          #4d7c78;           
+  --sidebar-text-hover:    #0d9488;           
+  --sidebar-active-bg:     #f0fdfa;           
+  --sidebar-active-text:   #0f766e;           
+  --sidebar-active-dot:    #14b8a6;           
 
-  /* Shadcn sidebar tokens */
+  
   --sidebar:                     #ffffff;
   --sidebar-foreground:          #134e4a;
   --sidebar-primary:             #14b8a6;
@@ -136,11 +126,11 @@
   --sidebar-ring:                #5eead4;
 }
 
-/* ── Base resets ─────────────────────────────────────────────────────────── */
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    font-family: inherit;   /* enforce Inter everywhere — no serif leaks */
+    font-family: inherit;   
   }
   body {
     @apply bg-background text-foreground;
@@ -157,18 +147,18 @@
   }
 }
 
-/* ── Decorative dot-grid (eBooi accent) — add via className="dot-grid" ───── */
+
 .dot-grid {
   background-image: radial-gradient(circle, #99f6e4 1px, transparent 1px);
   background-size: 18px 18px;
 }
 
-/* ── Teal gradient banner helper ─────────────────────────────────────────── */
+
 .brand-banner {
   background: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #06b6d4 100%);
 }
 
-/* ── Card hover lift (eBooi card feel) ───────────────────────────────────── */
+
 .card-lift {
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
@@ -177,7 +167,7 @@
   box-shadow: 0 8px 24px -4px rgba(20, 184, 166, 0.18);
 }
 
-/* ── Scrollbar — teal tinted ─────────────────────────────────────────────── */
+
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: #f0fdfa; }
 ::-webkit-scrollbar-thumb { background: #5eead4; border-radius: 99px; }

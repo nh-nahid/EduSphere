@@ -1,10 +1,7 @@
 const SmsLog = require('../models/SmsLog');
 const axios = require('axios');
 
-/**
- * Fetch all SMS logs for the current school.
- * Super admins see all logs across schools.
- */
+
 exports.getSmsLogs = async (req, res, next) => {
   const isSuperAdmin = req.user.role === 'super_admin';
   const filter = isSuperAdmin ? {} : { schoolId: req.schoolId };
@@ -12,9 +9,7 @@ exports.getSmsLogs = async (req, res, next) => {
   res.status(200).json({ success: true, data: logs });
 };
 
-/**
- * Send a manual WhatsApp message via Meta Cloud API and log the result.
- */
+
 exports.sendManualSms = async (req, res, next) => {
   const { phone, message } = req.body;
   if (!phone || !message) {
@@ -24,7 +19,7 @@ exports.sendManualSms = async (req, res, next) => {
   const token   = process.env.WHATSAPP_TOKEN;
   const phoneId = process.env.WHATSAPP_PHONE_ID;
 
-  // Normalize phone to E.164 without + (replace leading 0 with 880 for BD)
+  
   let to = phone.replace(/[\s+-]/g, '');
   if (to.startsWith('0')) {
     to = '880' + to.substring(1);

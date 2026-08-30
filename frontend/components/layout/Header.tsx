@@ -23,12 +23,12 @@ export default function Header() {
   const title = buildTitle(pathname)
   const school = user?.schoolId && typeof user.schoolId === 'object' ? user.schoolId : null
 
-  // ── States ──
+  
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isNotifOpen, setIsNotifOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
 
-  // ── Database Queries ──
+  
   const { data: notices } = useNotices()
   const { data: students } = useStudents()
   const { data: teachers } = useTeachers()
@@ -36,7 +36,7 @@ export default function Header() {
 
   const notifRef = useRef<HTMLDivElement>(null)
 
-  // Close notifications on clicking outside
+  
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (notifRef.current && !notifRef.current.contains(event.target as Node)) {
@@ -47,14 +47,14 @@ export default function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // Close modals on page navigation
+  
   useEffect(() => {
     setIsSearchOpen(false)
     setIsNotifOpen(false)
     setSearchQuery('')
   }, [pathname])
 
-  // ── Search Filtering ──
+  
   const query = searchQuery.trim().toLowerCase()
   const matchedStudents = query
     ? students?.filter((s: any) => s.userId?.name?.toLowerCase().includes(query)) || []
@@ -73,7 +73,7 @@ export default function Header() {
       className="h-14 flex items-center justify-between px-6 shrink-0 bg-white relative"
       style={{ borderBottom: '1.5px solid var(--border)' }}
     >
-      {/* ── Page title ── */}
+      {}
       <div className="flex items-center gap-2.5">
         <h1 className="text-[15px] font-semibold tracking-tight" style={{ color: 'var(--foreground)' }}>
           {title}
@@ -85,9 +85,9 @@ export default function Header() {
         )}
       </div>
 
-      {/* ── Actions ── */}
+      {}
       <div className="flex items-center gap-1">
-        {/* Search button */}
+        {}
         <button
           aria-label="Search"
           onClick={() => setIsSearchOpen(true)}
@@ -96,7 +96,7 @@ export default function Header() {
           <Search size={16} strokeWidth={2} />
         </button>
 
-        {/* Notification Bell Dropdown */}
+        {}
         <div className="relative" ref={notifRef}>
           <button
             aria-label="Notifications"
@@ -109,7 +109,7 @@ export default function Header() {
             )}
           </button>
 
-          {/* Notifications Dropdown Panel */}
+          {}
           {isNotifOpen && (
             <div className="absolute right-0 mt-2 w-80 bg-white border border-teal-100/60 rounded-2xl shadow-xl overflow-hidden z-50 py-1">
               <div className="px-4 py-2.5 border-b border-teal-50 bg-teal-50/20 flex justify-between items-center">
@@ -149,10 +149,10 @@ export default function Header() {
           )}
         </div>
 
-        {/* Divider */}
+        {}
         <div className="mx-2 h-4 w-px bg-teal-100/60" />
 
-        {/* Avatar + name */}
+        {}
         <Link
           href="/profile"
           className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-xl transition-colors hover:bg-teal-50 group"
@@ -171,11 +171,11 @@ export default function Header() {
         </Link>
       </div>
 
-      {/* ── Search Overlay Modal ── */}
+      {}
       {isSearchOpen && (
         <div className="fixed inset-0 bg-teal-950/20 backdrop-blur-sm z-50 flex items-start justify-center pt-20 px-4">
           <div className="w-full max-w-lg bg-white border border-teal-100/80 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[480px]">
-            {/* Search Input Box */}
+            {}
             <div className="p-4 border-b border-teal-100 flex items-center gap-3">
               <Search size={18} className="text-teal-600 shrink-0" />
               <input
@@ -194,12 +194,12 @@ export default function Header() {
               </button>
             </div>
 
-            {/* Results Block */}
+            {}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {searchQuery ? (
                 hasResults ? (
                   <>
-                    {/* Students Group */}
+                    {}
                     {matchedStudents.length > 0 && (
                       <div className="space-y-1.5">
                         <span className="text-[10px] font-bold text-teal-800/45 uppercase tracking-wider block px-2.5">Students</span>
@@ -219,7 +219,7 @@ export default function Header() {
                       </div>
                     )}
 
-                    {/* Teachers Group */}
+                    {}
                     {matchedTeachers.length > 0 && (
                       <div className="space-y-1.5">
                         <span className="text-[10px] font-bold text-teal-800/45 uppercase tracking-wider block px-2.5">Teachers</span>
@@ -239,7 +239,7 @@ export default function Header() {
                       </div>
                     )}
 
-                    {/* Classes Group */}
+                    {}
                     {matchedClasses.length > 0 && (
                       <div className="space-y-1.5">
                         <span className="text-[10px] font-bold text-teal-800/45 uppercase tracking-wider block px-2.5">Classes</span>

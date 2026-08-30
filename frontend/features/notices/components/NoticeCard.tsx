@@ -17,7 +17,7 @@ export const NoticeCard = () => {
   const { mutate: createNotice, isPending: isPublishing } = useCreateNotice()
   const { mutate: deleteNotice } = useDeleteNotice()
 
-  // Form States
+  
   const [showForm, setShowForm] = useState(false)
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
@@ -49,7 +49,7 @@ export const NoticeCard = () => {
 
   return (
     <div className="space-y-6 max-w-3xl">
-      {/* Header controls */}
+      {}
       <div className="flex justify-between items-center px-1">
         <h2 className="text-xl font-bold text-teal-955 font-sans tracking-tight flex items-center gap-2">
           <Bell size={20} className="text-teal-600" />
@@ -66,7 +66,7 @@ export const NoticeCard = () => {
         )}
       </div>
 
-      {/* Notice form */}
+      {}
       {showForm && canPublish && (
         <Card className="border-teal-100 bg-white rounded-2xl shadow-sm max-w-xl">
           <CardHeader className="brand-banner text-white p-5 rounded-t-2xl">
@@ -126,7 +126,7 @@ export const NoticeCard = () => {
         </Card>
       )}
 
-      {/* Main Notice list */}
+      {}
       {!showForm && (
         <div className="space-y-4">
           {notices?.length === 0 ? (

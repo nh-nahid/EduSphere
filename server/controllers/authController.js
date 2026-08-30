@@ -56,7 +56,7 @@ exports.logout = async (req, res, next) => {
       req.user.refreshToken = null;
       await req.user.save({ validateBeforeSave: false });
     }
-  } catch (_) { /* don't let a DB error block logout */ }
+  } catch (_) {  }
 
   const cookieOptions = {
     httpOnly: true,

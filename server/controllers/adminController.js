@@ -92,7 +92,7 @@ exports.toggleUserStatus = async (req, res, next) => {
   try {
     const user = await User.findOne({ _id: req.params.id, schoolId: req.schoolId });
     if (!user) return res.status(404).json({ success: false, message: 'User not found' });
-    // Assuming there's an isActive field. If not, maybe role or something? Wait, just toggle isActive
+    
     user.isActive = user.isActive === undefined ? false : !user.isActive;
     await user.save();
     res.json({ success: true, data: user });

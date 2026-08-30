@@ -10,7 +10,7 @@ interface StudentCardProps {
 }
 
 export const StudentCard = ({ id, student: initialStudent }: StudentCardProps) => {
-  // If id is provided, fetch student details from backend
+  
   const { data: fetchedStudent, isLoading } = useStudent(id || '')
   
   const student = initialStudent || fetchedStudent

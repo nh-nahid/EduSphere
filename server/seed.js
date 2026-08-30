@@ -1,37 +1,10 @@
-/**
- * seed.js
- * ───────────────────────────────────────────────────────────────────────────
- * Populates the database with realistic sample data for development/demo use.
- *
- * Usage:
- *   node seed.js          → seed everything (wipes existing data first)
- *   node seed.js --fresh  → alias for above
- *
- * What gets created:
- *   • 1  super_admin  user
- *   • 2  schools      (Green Valley Academy  +  Sunrise International)
- *   • 2  admins       (one per school)
- *   • 4  teachers     (two per school)
- *   • 12 students     (six per school, spread across classes)
- *   • 4  classes      (two per school)
- *   • 8  subjects     (four per school)
- *   • 30 attendance   records (last 15 school days for each class)
- *   • 24 grade        entries  (multiple subjects × students)
- *   • 4  assignments  (two per school)
- *   • 4  notices      (two per school)
- *   • 4  fees         (two per school)
- *   • 6  payments     (mix of paid / pending)
- *   • 6  smsLogs      (from attendance / fee events)
- *
- * All passwords are:  Password@123
- * ───────────────────────────────────────────────────────────────────────────
- */
+
 
 require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt   = require('bcryptjs');
 
-// ── Models ────────────────────────────────────────────────────────────────────
+
 const User       = require('./models/User');
 const School     = require('./models/School');
 const Student    = require('./models/Student');
@@ -46,10 +19,10 @@ const Fee        = require('./models/Fee');
 const Payment    = require('./models/Payment');
 const SmsLog     = require('./models/SmsLog');
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+
 const hash = (pw) => bcrypt.hash(pw, 10);
 
-/** Returns a Date N days ago from today */
+
 const daysAgo = (n) => {
   const d = new Date();
   d.setDate(d.getDate() - n);
@@ -57,7 +30,7 @@ const daysAgo = (n) => {
   return d;
 };
 
-/** Returns a Date N days in the future */
+
 const daysFromNow = (n) => {
   const d = new Date();
   d.setDate(d.getDate() + n);
@@ -65,10 +38,10 @@ const daysFromNow = (n) => {
   return d;
 };
 
-/** Pick one element from an array randomly */
+
 const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-/** Calculate letter grade from percentage */
+
 const letterGrade = (marks, total) => {
   const pct = (marks / total) * 100;
   if (pct >= 90) return 'A+';
@@ -80,12 +53,12 @@ const letterGrade = (marks, total) => {
   return 'F';
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
+
 async function seed() {
   await mongoose.connect(process.env.MONGO_CONNECTION_STRING);
   console.log('✅ Connected to MongoDB\n');
 
-  // ── Wipe existing data ──────────────────────────────────────────────────────
+  
   console.log('🗑️  Clearing existing data...');
   await Promise.all([
     User.deleteMany({}),
@@ -106,9 +79,9 @@ async function seed() {
 
   const PASSWORD = 'Password@123';
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 1. SUPER ADMIN
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('👑 Creating super admin...');
   const superAdmin = await User.create({
     name:     'Super Admin',
@@ -119,9 +92,9 @@ async function seed() {
   });
   console.log(`   ✅ ${superAdmin.name}  →  ${superAdmin.email}`);
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 2. SCHOOLS
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n🏫 Creating schools...');
   const [schoolA, schoolB] = await School.insertMany([
     {
@@ -148,9 +121,9 @@ async function seed() {
   console.log(`   ✅ ${schoolA.name}`);
   console.log(`   ✅ ${schoolB.name}`);
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 3. ADMIN USERS  (one per school)
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n👔 Creating school admins...');
   const [adminA, adminB] = await User.insertMany([
     { name: 'Rahim Uddin',   email: 'admin@greenvalley.edu.bd',  password: await hash(PASSWORD), role: 'admin', schoolId: schoolA._id, phone: '01711100001' },
@@ -159,12 +132,12 @@ async function seed() {
   console.log(`   ✅ ${adminA.name}  →  ${adminA.email}`);
   console.log(`   ✅ ${adminB.name}  →  ${adminB.email}`);
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 4. TEACHER USERS + TEACHER PROFILES  (two per school)
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n🧑‍🏫 Creating teachers...');
 
-  // School A teachers
+  
   const [tuserA1, tuserA2, tuserB1, tuserB2] = await User.insertMany([
     { name: 'Kamal Hossain',  email: 'kamal@greenvalley.edu.bd',  password: await hash(PASSWORD), role: 'teacher', schoolId: schoolA._id, phone: '01711200001' },
     { name: 'Fatema Begum',   email: 'fatema@greenvalley.edu.bd', password: await hash(PASSWORD), role: 'teacher', schoolId: schoolA._id, phone: '01711200002' },
@@ -180,9 +153,9 @@ async function seed() {
   ]);
   [tuserA1, tuserA2, tuserB1, tuserB2].forEach(u => console.log(`   ✅ ${u.name}  →  ${u.email}`));
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 5. CLASSES  (two per school)
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n🏛️  Creating classes...');
   const [classA1, classA2, classB1, classB2] = await Class.insertMany([
     { name: 'Class 6', section: 'A', classTeacherId: teacherA1._id, academicYear: '2024-25', schoolId: schoolA._id },
@@ -192,9 +165,9 @@ async function seed() {
   ]);
   [classA1, classA2, classB1, classB2].forEach(c => console.log(`   ✅ ${c.name} ${c.section}  (${c.academicYear})`));
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 6. SUBJECTS  (four per school, linked to classes & teachers)
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n📚 Creating subjects...');
   const [subA1, subA2, subA3, subA4, subB1, subB2, subB3, subB4] = await Subject.insertMany([
     { name: 'Mathematics', code: 'MATH-6A', classId: classA1._id, teacherId: teacherA1._id, schoolId: schoolA._id },
@@ -207,13 +180,13 @@ async function seed() {
     { name: 'English',     code: 'ENG-9B',  classId: classB2._id, teacherId: teacherB2._id, schoolId: schoolB._id },
   ]);
 
-  // Update classes with subjectIds
+  
   await Class.findByIdAndUpdate(classA1._id, { subjectIds: [subA1._id, subA2._id] });
   await Class.findByIdAndUpdate(classA2._id, { subjectIds: [subA3._id, subA4._id] });
   await Class.findByIdAndUpdate(classB1._id, { subjectIds: [subB1._id, subB2._id] });
   await Class.findByIdAndUpdate(classB2._id, { subjectIds: [subB3._id, subB4._id] });
 
-  // Update teachers with subjects
+  
   await Teacher.findByIdAndUpdate(teacherA1._id, { subjects: [subA1._id, subA3._id], classIds: [classA1._id, classA2._id] });
   await Teacher.findByIdAndUpdate(teacherA2._id, { subjects: [subA2._id, subA4._id], classIds: [classA1._id, classA2._id] });
   await Teacher.findByIdAndUpdate(teacherB1._id, { subjects: [subB1._id, subB3._id], classIds: [classB1._id, classB2._id] });
@@ -221,27 +194,27 @@ async function seed() {
 
   console.log(`   ✅ Created 8 subjects across 4 classes`);
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 7. STUDENT USERS + STUDENT PROFILES  (6 per school = 12 total)
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n🎓 Creating students...');
 
   const studentSeedData = [
-    // ── Green Valley Academy ────────────────────────────────────────────────
-    // Class 6A
+    
+    
     { name: 'Abir Hassan',      email: 'abir@student.gv.bd',    phone: '01900100001', school: schoolA, cls: classA1, roll: '01', section: 'A', guardian: 'Hassan Ali',     gPhone: '01711300001', admDate: daysAgo(365) },
     { name: 'Riya Akter',       email: 'riya@student.gv.bd',    phone: '01900100002', school: schoolA, cls: classA1, roll: '02', section: 'A', guardian: 'Akter Ahmed',    gPhone: '01711300002', admDate: daysAgo(365) },
     { name: 'Tanvir Islam',     email: 'tanvir@student.gv.bd',  phone: '01900100003', school: schoolA, cls: classA1, roll: '03', section: 'A', guardian: 'Islam Miah',     gPhone: '01711300003', admDate: daysAgo(365) },
-    // Class 7B
+    
     { name: 'Nusrat Jahan',     email: 'nusrat@student.gv.bd',  phone: '01900100004', school: schoolA, cls: classA2, roll: '01', section: 'B', guardian: 'Jahan Beg',      gPhone: '01711300004', admDate: daysAgo(730) },
     { name: 'Sabbir Ahmed',     email: 'sabbir@student.gv.bd',  phone: '01900100005', school: schoolA, cls: classA2, roll: '02', section: 'B', guardian: 'Ahmed Khan',     gPhone: '01711300005', admDate: daysAgo(730) },
     { name: 'Mehzabin Chowdhury', email: 'mehzabin@student.gv.bd', phone: '01900100006', school: schoolA, cls: classA2, roll: '03', section: 'B', guardian: 'Chowdhury Sb', gPhone: '01711300006', admDate: daysAgo(730) },
-    // ── Sunrise International ────────────────────────────────────────────────
-    // Class 8A
+    
+    
     { name: 'Rafiqul Islam',    email: 'rafiq@student.sr.bd',   phone: '01800100001', school: schoolB, cls: classB1, roll: '01', section: 'A', guardian: 'Islam Uddin',    gPhone: '01811300001', admDate: daysAgo(400) },
     { name: 'Sumaiya Khatun',   email: 'sumaiya@student.sr.bd', phone: '01800100002', school: schoolB, cls: classB1, roll: '02', section: 'A', guardian: 'Khatun Bibi',    gPhone: '01811300002', admDate: daysAgo(400) },
     { name: 'Akib Hasan',       email: 'akib@student.sr.bd',    phone: '01800100003', school: schoolB, cls: classB1, roll: '03', section: 'A', guardian: 'Hasan Mia',      gPhone: '01811300003', admDate: daysAgo(400) },
-    // Class 9B
+    
     { name: 'Lamia Akter',      email: 'lamia@student.sr.bd',   phone: '01800100004', school: schoolB, cls: classB2, roll: '01', section: 'B', guardian: 'Akter Sb',       gPhone: '01811300004', admDate: daysAgo(600) },
     { name: 'Toufiq Rahman',    email: 'toufiq@student.sr.bd',  phone: '01800100005', school: schoolB, cls: classB2, roll: '02', section: 'B', guardian: 'Rahman Sb',      gPhone: '01811300005', admDate: daysAgo(600) },
     { name: 'Shahida Parvin',   email: 'shahida@student.sr.bd', phone: '01800100006', school: schoolB, cls: classB2, roll: '03', section: 'B', guardian: 'Parvin Bibi',    gPhone: '01811300006', admDate: daysAgo(600) },
@@ -274,7 +247,7 @@ async function seed() {
     console.log(`   ✅ ${user.name}  →  ${user.email}`);
   }
 
-  // Update classes with their student IDs
+  
   const studentsA1 = studentProfiles.filter(s => s.classId.toString() === classA1._id.toString());
   const studentsA2 = studentProfiles.filter(s => s.classId.toString() === classA2._id.toString());
   const studentsB1 = studentProfiles.filter(s => s.classId.toString() === classB1._id.toString());
@@ -285,9 +258,9 @@ async function seed() {
   await Class.findByIdAndUpdate(classB1._id, { $push: { studentIds: { $each: studentsB1.map(s => s._id) } } });
   await Class.findByIdAndUpdate(classB2._id, { $push: { studentIds: { $each: studentsB2.map(s => s._id) } } });
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 8. ATTENDANCE  (last 15 school days for each of the 4 classes)
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n📋 Creating attendance records...');
   const statuses = ['present', 'present', 'present', 'present', 'absent', 'present', 'present', 'late', 'present', 'present'];
 
@@ -302,7 +275,7 @@ async function seed() {
   for (const { cls, students, teacher, school } of classGroups) {
     for (let day = 1; day <= 15; day++) {
       const date = daysAgo(day);
-      // Skip weekends (0=Sun, 6=Sat)
+      
       if (date.getDay() === 0 || date.getDay() === 6) continue;
 
       await Attendance.create({
@@ -317,34 +290,34 @@ async function seed() {
   }
   console.log(`   ✅ Created ${attendanceCount} attendance records`);
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 9. GRADES  (first_term + second_term for each student × 2 subjects)
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n📊 Creating grade records...');
 
   const gradeEntries = [
-    // School A — Class 6A students × subA1 (Math) + subA2 (English)
+    
     ...studentsA1.flatMap(st => [
       { studentId: st._id, subjectId: subA1._id, examType: 'first_term',  marks: 72 + Math.floor(Math.random()*25), totalMarks: 100, schoolId: schoolA._id },
       { studentId: st._id, subjectId: subA1._id, examType: 'second_term', marks: 68 + Math.floor(Math.random()*28), totalMarks: 100, schoolId: schoolA._id },
       { studentId: st._id, subjectId: subA2._id, examType: 'first_term',  marks: 60 + Math.floor(Math.random()*35), totalMarks: 100, schoolId: schoolA._id },
       { studentId: st._id, subjectId: subA2._id, examType: 'second_term', marks: 65 + Math.floor(Math.random()*30), totalMarks: 100, schoolId: schoolA._id },
     ]),
-    // School A — Class 7B students × subA3 (Math) + subA4 (Science)
+    
     ...studentsA2.flatMap(st => [
       { studentId: st._id, subjectId: subA3._id, examType: 'first_term',  marks: 55 + Math.floor(Math.random()*40), totalMarks: 100, schoolId: schoolA._id },
       { studentId: st._id, subjectId: subA3._id, examType: 'second_term', marks: 60 + Math.floor(Math.random()*35), totalMarks: 100, schoolId: schoolA._id },
       { studentId: st._id, subjectId: subA4._id, examType: 'first_term',  marks: 70 + Math.floor(Math.random()*25), totalMarks: 100, schoolId: schoolA._id },
       { studentId: st._id, subjectId: subA4._id, examType: 'second_term', marks: 75 + Math.floor(Math.random()*20), totalMarks: 100, schoolId: schoolA._id },
     ]),
-    // School B — Class 8A students × subB1 (Physics) + subB2 (Bengali)
+    
     ...studentsB1.flatMap(st => [
       { studentId: st._id, subjectId: subB1._id, examType: 'first_term',  marks: 50 + Math.floor(Math.random()*45), totalMarks: 100, schoolId: schoolB._id },
       { studentId: st._id, subjectId: subB1._id, examType: 'second_term', marks: 55 + Math.floor(Math.random()*40), totalMarks: 100, schoolId: schoolB._id },
       { studentId: st._id, subjectId: subB2._id, examType: 'first_term',  marks: 65 + Math.floor(Math.random()*30), totalMarks: 100, schoolId: schoolB._id },
       { studentId: st._id, subjectId: subB2._id, examType: 'second_term', marks: 70 + Math.floor(Math.random()*25), totalMarks: 100, schoolId: schoolB._id },
     ]),
-    // School B — Class 9B students × subB3 (Chemistry) + subB4 (English)
+    
     ...studentsB2.flatMap(st => [
       { studentId: st._id, subjectId: subB3._id, examType: 'first_term',  marks: 60 + Math.floor(Math.random()*35), totalMarks: 100, schoolId: schoolB._id },
       { studentId: st._id, subjectId: subB3._id, examType: 'second_term', marks: 58 + Math.floor(Math.random()*38), totalMarks: 100, schoolId: schoolB._id },
@@ -356,9 +329,9 @@ async function seed() {
   await Grade.insertMany(gradeEntries);
   console.log(`   ✅ Created ${gradeEntries.length} grade entries`);
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 10. ASSIGNMENTS  (two per school)
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n📝 Creating assignments...');
   await Assignment.insertMany([
     {
@@ -400,9 +373,9 @@ async function seed() {
   ]);
   console.log(`   ✅ Created 4 assignments`);
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 11. NOTICES  (two per school)
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n📢 Creating notices...');
   await Notice.insertMany([
     {
@@ -440,9 +413,9 @@ async function seed() {
   ]);
   console.log(`   ✅ Created 4 notices`);
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 12. FEES  (two per school)
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n💳 Creating fees...');
   const [feeA1, feeA2, feeB1, feeB2] = await Fee.insertMany([
     { title: 'Monthly Tuition Fee — August',  classId: classA1._id, amount: 2500, dueDate: daysFromNow(5),  academicYear: '2024-25', type: 'tuition',   schoolId: schoolA._id },
@@ -452,28 +425,28 @@ async function seed() {
   ]);
   console.log(`   ✅ Created 4 fee schedules`);
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 13. PAYMENTS  (mix of paid & pending)
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n💰 Creating payment records...');
 
   const txn = (n) => `SMS-${Date.now() + n}-DEMO${n.toString().padStart(4,'0')}`;
 
   const payments = await Payment.insertMany([
-    // Paid
+    
     { studentId: studentsA1[0]._id, feeId: feeA1._id, amount: 2500, gatewayTxnId: txn(1), status: 'paid',    paidAt: daysAgo(3),  schoolId: schoolA._id },
     { studentId: studentsA1[1]._id, feeId: feeA1._id, amount: 2500, gatewayTxnId: txn(2), status: 'paid',    paidAt: daysAgo(5),  schoolId: schoolA._id },
     { studentId: studentsA2[0]._id, feeId: feeA2._id, amount: 1500, gatewayTxnId: txn(3), status: 'paid',    paidAt: daysAgo(10), schoolId: schoolA._id },
     { studentId: studentsB1[0]._id, feeId: feeB1._id, amount: 3000, gatewayTxnId: txn(4), status: 'paid',    paidAt: daysAgo(2),  schoolId: schoolB._id },
-    // Pending
+    
     { studentId: studentsA1[2]._id, feeId: feeA1._id, amount: 2500, gatewayTxnId: txn(5), status: 'pending',                      schoolId: schoolA._id },
     { studentId: studentsB2[0]._id, feeId: feeB2._id, amount: 1200, gatewayTxnId: txn(6), status: 'pending',                      schoolId: schoolB._id },
   ]);
   console.log(`   ✅ Created ${payments.length} payments (4 paid · 2 pending)`);
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // 14. SMS LOGS
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n📱 Creating SMS log records...');
   await SmsLog.insertMany([
     { recipient: '01711300001', message: 'Your child Abir Hassan was absent on ' + daysAgo(3).toDateString() + '.', event: 'absence',  status: 'sent',   studentId: studentsA1[0]._id, schoolId: schoolA._id, sentAt: daysAgo(3) },
@@ -485,9 +458,9 @@ async function seed() {
   ]);
   console.log(`   ✅ Created 6 SMS log entries`);
 
-  // ══════════════════════════════════════════════════════════════════════════════
-  // SUMMARY
-  // ══════════════════════════════════════════════════════════════════════════════
+  
+  
+  
   console.log('\n' + '═'.repeat(60));
   console.log('🌱  DATABASE SEEDED SUCCESSFULLY');
   console.log('═'.repeat(60));
