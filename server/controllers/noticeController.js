@@ -23,3 +23,11 @@ exports.getNotices = async (req, res, next) => {
   const notices = await Notice.find({ schoolId: req.schoolId, targetRole: { $in: ['all', req.user.role] } });
   res.status(200).json({ success: true, data: notices });
 };
+
+exports.deleteNotice = async (req, res, next) => {
+  try {
+    const notice = await Notice.findOneAndDelete({ _id: req.params.id, schoolId: req.schoolId });
+    if (!notice) return res.status(404).json({ success: false, message: 'Notice not found' });
+    res.status(200).json({ success: true, message: 'Notice deleted successfully' });
+  } catch (err) { next(err); }
+};

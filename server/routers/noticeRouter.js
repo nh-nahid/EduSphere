@@ -10,4 +10,7 @@ router.route('/')
   .post(noticeController.createNotice)
   .get(noticeController.getNotices);
 
+router.route('/:id')
+  .delete(noticeController.deleteNotice);
+
 module.exports = router;
