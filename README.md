@@ -127,6 +127,49 @@ EduSphere/
 
 ---
 
+## 🔑 Demo Credentials
+
+> All demo accounts use the same password: **`Password@123`**
+
+### 🌐 Super Admin *(Global Network Access)*
+
+| Email | Password |
+|---|---|
+| `superadmin@schoolms.com` | `Password@123` |
+
+---
+
+### 🏫 School Admin
+
+| Email | Password | School |
+|---|---|---|
+| `admin@greenvalley.edu.bd` | `Password@123` | Green Valley Academy (Pro) |
+| `admin@sunrise.edu.bd` | `Password@123` | Sunrise International School (Basic) |
+
+---
+
+### 🧑‍🏫 Teacher
+
+| Email | Password | School |
+|---|---|---|
+| `kamal@greenvalley.edu.bd` | `Password@123` | Green Valley Academy |
+| `fatema@greenvalley.edu.bd` | `Password@123` | Green Valley Academy |
+| `arif@sunrise.edu.bd` | `Password@123` | Sunrise International School |
+| `sadia@sunrise.edu.bd` | `Password@123` | Sunrise International School |
+
+---
+
+### 🎓 Student
+
+| Email | Password | School |
+|---|---|---|
+| `abir@student.gv.bd` | `Password@123` | Green Valley Academy |
+| `riya@student.gv.bd` | `Password@123` | Green Valley Academy |
+| `rafiq@student.sr.bd` | `Password@123` | Sunrise International School |
+| `lamia@student.sr.bd` | `Password@123` | Sunrise International School |
+
+---
+
 ## ⚙️ Getting Started
 
 ### Prerequisites
